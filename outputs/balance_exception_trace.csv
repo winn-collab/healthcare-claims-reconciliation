@@ -1,0 +1,9 @@
+claim_id,encounter_id,description,base_encounter_cost,total_encounter_claim_cost,transaction_charges,transaction_payments,transaction_difference,encounter_cost_not_in_charge_export,cost_above_base,payer_coverage,recorded_primary_balance,recorded_secondary_balance,recorded_patient_balance,primary_equals_payer_coverage,patient_equals_total_minus_coverage,secondary_repeats_primary_without_secondary_insurance
+1be83f06-48ef-7bac-6dc6-7fb4b0e23e4a,1be83f06-48ef-7bac-9bb6-aefe6979aeaa,Death Certification,136.80,211.38,136.80,136.80,0.00,74.58,74.58,0.00,0.00,0.00,211.38,True,True,False
+fb56f051-a2cd-ac10-6276-0ae9d8568992,fb56f051-a2cd-ac10-2cb5-711b2d420441,Death Certification,136.80,211.38,136.80,136.80,0.00,74.58,74.58,176.38,176.38,176.38,35.00,True,True,True
+0b786670-17af-32e1-4bbe-e6b65f77d500,0b786670-17af-32e1-c58b-312c1117cc97,Death Certification,136.80,211.38,136.80,136.80,0.00,74.58,74.58,147.97,147.97,147.97,63.41,True,True,True
+2211f478-b7b4-7711-5528-225e2c2760dc,2211f478-b7b4-7711-c3cf-c260af366446,Death Certification,136.80,211.38,136.80,136.80,0.00,74.58,74.58,211.38,211.38,211.38,0.00,True,True,True
+6b687f11-0721-ccaf-0afa-6fddd2c34e9f,6b687f11-0721-ccaf-c6bc-e72561afb13f,Death Certification,136.80,211.38,136.80,136.80,0.00,74.58,74.58,0.00,0.00,0.00,211.38,True,True,False
+8d91c36a-1f7e-3842-e212-cb540fb8a68e,8d91c36a-1f7e-3842-ecec-fec2b9831667,Death Certification,136.80,211.38,136.80,136.80,0.00,74.58,74.58,169.10,169.10,,42.28,True,True,False
+031ce8e2-1443-01b4-fccd-48b23e45a1db,031ce8e2-1443-01b4-cfba-cb13fd522858,Death Certification,136.80,211.38,136.80,136.80,0.00,74.58,74.58,211.38,211.38,211.38,0.00,True,True,True
+30889246-5f7d-9305-a171-f8c64b088f92,30889246-5f7d-9305-46a9-78e82d3b58f3,Death Certification,136.80,211.38,136.80,136.80,0.00,74.58,74.58,169.10,169.10,169.10,42.28,True,True,True

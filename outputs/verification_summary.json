@@ -1,0 +1,225 @@
+{
+  "verified_at_utc": "2026-10-13T01:42:18.655620+00:00",
+  "python": "3.14.4",
+  "archive_sha256": "d61417b551e5b0997c33851b339c157421751f0ea68c18ea686ceb1850907c35",
+  "status": "pass",
+  "scope": "Archived CSVs and saved exports; no live MySQL or Power BI inspection",
+  "source_inventory": [
+    {
+      "file": "allergies.csv",
+      "rows": 105,
+      "columns": 15,
+      "sha256": "f40ba61ee159bd91989ad239743e4d2c80a05c9e7da83db613b54271bba9b746"
+    },
+    {
+      "file": "careplans.csv",
+      "rows": 349,
+      "columns": 9,
+      "sha256": "bce3029163eb85442255fa4361be456191308a18173b91a139050979119f43ae"
+    },
+    {
+      "file": "claims.csv",
+      "rows": 9421,
+      "columns": 31,
+      "sha256": "ce4e6acb7569f12fba058fb6f0b9734a3cdde446ce41c2135167ce668ea5d288"
+    },
+    {
+      "file": "claims_transactions.csv",
+      "rows": 85047,
+      "columns": 33,
+      "sha256": "660a48994403bfe85884126e1904fabc16960ce8c554aa7d951cce59ec2460b6"
+    },
+    {
+      "file": "conditions.csv",
+      "rows": 3517,
+      "columns": 7,
+      "sha256": "a3141544140b626c9ae941043ad1afe4a0c201749b2e332c98f4cb2e2b7ec4cd"
+    },
+    {
+      "file": "devices.csv",
+      "rows": 524,
+      "columns": 7,
+      "sha256": "576fde327c40587c5e34075bc57c12d237d646964a6062bec71916d5092a7d29"
+    },
+    {
+      "file": "encounters.csv",
+      "rows": 5571,
+      "columns": 15,
+      "sha256": "16d209cb1429605c90c80cd859ac16569108dc46890f50eb6a125a0602235b3a"
+    },
+    {
+      "file": "imaging_studies.csv",
+      "rows": 478,
+      "columns": 13,
+      "sha256": "bebfa122958cde7522706dddc1187663f11d34136dbf63a5a2aa16128638aa3f"
+    },
+    {
+      "file": "immunizations.csv",
+      "rows": 1549,
+      "columns": 6,
+      "sha256": "caecf46c86586f91b507e3ab1f847f52e022550acbf5c48759a1ac151cdb2763"
+    },
+    {
+      "file": "medications.csv",
+      "rows": 3850,
+      "columns": 13,
+      "sha256": "53d1d9f51c62cc6cebf236ab739ef9973ba27e65f1000a8a518026670fbffa62"
+    },
+    {
+      "file": "observations.csv",
+      "rows": 68648,
+      "columns": 9,
+      "sha256": "9517c23df9ebddee59961bcbcb82bd6b2b885ebc8136507ef8a2ccdc7ddae9d1"
+    },
+    {
+      "file": "organizations.csv",
+      "rows": 278,
+      "columns": 12,
+      "sha256": "fdbea738d91e8b643e53c3b7f29d7ff47319caf7ee943323d1058c3000341969"
+    },
+    {
+      "file": "patients.csv",
+      "rows": 108,
+      "columns": 28,
+      "sha256": "0e8a61760644976571e7ede02e8be5bfece5111bc179d2139af87f84b630c859"
+    },
+    {
+      "file": "payer_transitions.csv",
+      "rows": 3815,
+      "columns": 8,
+      "sha256": "614fda09baa674f452f73db6afe3a48997dc5e2be27d01098094d1689e5e27e7"
+    },
+    {
+      "file": "payers.csv",
+      "rows": 10,
+      "columns": 22,
+      "sha256": "daa80d02749bbd1b1076d8daa290780c89a45802d4161b69cbff1918dc66e69f"
+    },
+    {
+      "file": "procedures.csv",
+      "rows": 15884,
+      "columns": 10,
+      "sha256": "0eb6949cc13053f31dda394db8de2dd8ec73a712b21b755cece14f8829f9534b"
+    },
+    {
+      "file": "providers.csv",
+      "rows": 278,
+      "columns": 14,
+      "sha256": "6957c3f7e2bb1b5ab1505b09fc73db41eed6ff41e867d765704a953159405627"
+    },
+    {
+      "file": "supplies.csv",
+      "rows": 2225,
+      "columns": 6,
+      "sha256": "d64513799796616b4a8d0e67f80bda493b5027d14e8b3bcb108409a9ad5a8a38"
+    }
+  ],
+  "checks": [
+    {
+      "check": "Extracted CSVs match archived bytes",
+      "status": "pass",
+      "detail": "18 files"
+    },
+    {
+      "check": "Unique populated claim/encounter/transaction IDs",
+      "status": "pass",
+      "detail": "9421 claims; 5571 encounters; 85047 transactions"
+    },
+    {
+      "check": "Sample population counts",
+      "status": "pass",
+      "detail": "Expected 9,421 / 5,571 / 85,047"
+    },
+    {
+      "check": "Transaction claim references",
+      "status": "pass",
+      "detail": "0 orphaned/missing"
+    },
+    {
+      "check": "Claim encounter/patient consistency",
+      "status": "pass",
+      "detail": "0 issues"
+    },
+    {
+      "check": "Encounter claim coverage",
+      "status": "pass",
+      "detail": "0 encounters without claims"
+    },
+    {
+      "check": "Charge/payment coverage",
+      "status": "pass",
+      "detail": "0 incomplete claim summaries"
+    },
+    {
+      "check": "Claim-level transaction reconciliation",
+      "status": "pass",
+      "detail": "0 differences above $0.005"
+    },
+    {
+      "check": "Sample monetary reference",
+      "status": "pass",
+      "detail": "Charges 15795506.28; payments 15795506.28"
+    },
+    {
+      "check": "Exception population/context",
+      "status": "pass",
+      "detail": "8 positive-balance claims"
+    },
+    {
+      "check": "Investigated encounter-cost gaps",
+      "status": "pass",
+      "detail": "Total investigated gap 596.64"
+    },
+    {
+      "check": "Export identity and claim totals: outputs/claim_reporting.csv",
+      "status": "pass",
+      "detail": "9421 unique exported claims; tolerance $0.005"
+    },
+    {
+      "check": "Reporting exception flags",
+      "status": "pass",
+      "detail": "8 flagged claims"
+    },
+    {
+      "check": "Export identity and claim totals: data/processed/claim_analysis.csv",
+      "status": "pass",
+      "detail": "9421 unique exported claims; tolerance $0.005"
+    },
+    {
+      "check": "Saved exception trace",
+      "status": "pass",
+      "detail": "8 exception rows"
+    },
+    {
+      "check": "Category count/totals: data/processed/financial_summary_by_category.csv",
+      "status": "pass",
+      "detail": "10 categories"
+    },
+    {
+      "check": "Category count/totals: outputs/category_totals_202610061431.csv",
+      "status": "pass",
+      "detail": "10 categories"
+    }
+  ],
+  "transaction_types": {
+    "CHARGE": 26854,
+    "PAYMENT": 32327,
+    "TRANSFEROUT": 12933,
+    "TRANSFERIN": 12933
+  },
+  "power_bi_interaction_evidence": {
+    "status": "user-demonstrated screenshots, not executed by this script",
+    "ambulatory": {
+      "claims": 4083,
+      "charges": "12277051.63",
+      "payments": "12277051.63",
+      "positive_balance_claims": 0
+    },
+    "cleared": {
+      "claims": 9421,
+      "charges": "15795506.28",
+      "payments": "15795506.28",
+      "positive_balance_claims": 8
+    }
+  }
+}

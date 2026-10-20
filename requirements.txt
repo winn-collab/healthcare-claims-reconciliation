@@ -1,0 +1,6 @@
+# Direct dependencies for the existing analysis and optional MySQL loader.
+# Recorded installed versions are in docs/environment_snapshot.txt.
+# A fresh installation of that exact snapshot has not been verified.
+pandas
+SQLAlchemy
+PyMySQL

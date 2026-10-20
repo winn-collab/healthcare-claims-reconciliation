@@ -1,0 +1,21 @@
+{
+  "scope": "Temporary copies of exports; original data unchanged",
+  "controls": [
+    {
+      "control": "incorrect_balance_flag",
+      "expected_exit": 1,
+      "observed_exit": 1,
+      "detected_by": [
+        "Reporting exception flags"
+      ]
+    },
+    {
+      "control": "changed_claim_charge",
+      "expected_exit": 1,
+      "observed_exit": 1,
+      "detected_by": [
+        "Export identity and claim totals: outputs/claim_reporting.csv"
+      ]
+    }
+  ]
+}

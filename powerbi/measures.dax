@@ -1,0 +1,12 @@
+// Transcribed from the shared learning history; saved-model export pending.
+// Create each measure separately in Power BI. This is not a deployable model.
+// SUM of flags counts claims because the reporting grain is one row per claim.
+
+Claim Count = DISTINCTCOUNT(claim_reporting[claim_id])
+
+Total Charges = SUM(claim_reporting[charges])
+
+Total Payments = SUM(claim_reporting[payments])
+
+Claims with Recorded Balances =
+SUM(claim_reporting[positive_recorded_balance_flag])

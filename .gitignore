@@ -1,0 +1,18 @@
+# Local environments and generated interpreter files
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+
+# Preserve the original archive locally; publish provenance instead.
+data/raw/
+
+# Operating-system files
+.DS_Store
+Thumbs.db
