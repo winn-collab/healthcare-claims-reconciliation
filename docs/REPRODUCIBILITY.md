@@ -118,7 +118,7 @@ visual-level positive_recorded_balance_flag filter to 1.
 The measure file transcribes formulas recorded in the conversation; a live model
 export is pending. Import/applied steps and the final chart's exact field mapping
 are not fully exported. The current model has a single table, not star-schema
-relationships. See [Power BI evidence](../powerbi/README.md) for accepted filter values.
+relationships. See [Power BI evidence](../powerbi/DASHBOARD.md) for accepted filter values.
 
 ## Verification boundaries
 

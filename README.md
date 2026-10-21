@@ -2,134 +2,89 @@
 
 **Python · SQL/MySQL · Power BI · Data quality · Financial reconciliation**
 
-Can matching charges and payments hide inconsistent reporting? This project
-analyzes synthetic healthcare claims, checks the relationships behind financial
-totals, and investigates eight records whose recorded balances disagree with
-the exported transaction evidence.
+I built this project to understand whether healthcare claims and payments matched
+and investigate any balances that still appeared outstanding. I used Python and
+SQL to check the data, then built a Power BI dashboard to explore the results.
 
-The main finding: **eight death-certification encounters each include $74.58 in
-encounter costs absent from exported charge transactions ($596.64 combined)**.
-Reviewed Synthea source code supports a report-cost/export explanation. Matching
-exported charges and payments does not establish complete encounter-cost coverage
-or verified unpaid debt. The archive's exact generator version is unverified.
+Across **9,421 claims**, charges and payments both totaled **$15,795,506.28**.
+However, eight claims still showed positive recorded balances. I traced all eight
+to death-certification encounters and found a **$74.58 difference** between each
+encounter's total cost ($211.38) and its exported charges ($136.80).
 
-[![Power BI report showing 9,421 claims, matching charges and payments of $15,795,506.28, and eight claims with positive recorded balances; select to open the filter demonstration](powerbi/screenshots/overview.png)](powerbi/screenshots/slicer-demo.mp4)
+That added up to **$596.64 across the eight encounters**. Reviewing Synthea's
+source code pointed to report costs being included in encounter totals but left
+out of transaction exports. I could not confirm the original sample's exact
+generator version or configuration, so this is a supported explanation rather
+than a confirmed cause. The cost difference and recorded balances are separate
+findings; neither establishes that money was owed or lost.
 
-[Watch the category-filter demonstration (MP4, 39 seconds)](powerbi/screenshots/slicer-demo.mp4).
-Select the screenshot or the link above to open the recording. It shows
-ambulatory and other category selections, then clears the
-selection to restore the full totals and eight exception rows.
+[![Power BI overview: 9,421 claims, matching charges and payments of $15,795,506.28, and eight balance exceptions; select to open the recording](powerbi/screenshots/overview.png)](powerbi/screenshots/slicer-demo.mp4)
 
-## Results at a glance
+**[Read the three-page visual report (PDF)](docs/PROJECT_BRIEF.pdf)** ·
+**[Watch the filter demonstration (39 seconds)](powerbi/screenshots/slicer-demo.mp4)**
 
-| Measure | Verified result |
+The recording shows category selections and then clears the selection to restore
+all claims and eight exception rows. The screenshot opens the same recording.
+
+## What I found
+
+| Measure | Result |
 |---|---:|
-| Synthetic patients | 108 |
-| Encounters | 5,571 |
-| Claims | 9,421 |
-| Transaction records | 85,047 |
-| Exported charges | $15,795,506.28 |
-| Exported payments | $15,795,506.28 |
-| Claims with transaction differences above $0.005 | 0 |
-| Claims with positive recorded balances | 8 |
-| Cost absent from charge export in investigated encounters | $596.64 |
+| Synthetic patients / encounters | 108 / 5,571 |
+| Claims / transaction records | 9,421 / 85,047 |
+| Exported charges / payments, each | $15,795,506.28 |
+| Claim-level charge/payment differences above $0.005 | 0 |
+| Claims with any positive recorded balance | 8 |
+| Cost absent from charges across the eight investigated encounters | $596.64 |
 | Ambulatory share of exported charges | 77.72% |
 
-These describe this synthetic sample, not an actual provider's performance.
-The $596.64 is a representation gap, not demonstrated revenue loss or money recovered.
+## What I did
 
-## Review the work
+- Checked the source files for missing financial values, duplicate identifiers,
+  and records that did not match across tables.
+- Added up transactions for each claim before joining encounter details, so
+  claims stayed in the analysis and financial totals were not counted twice.
+- Compared the Python and SQL results and investigated the eight balance
+  exceptions using exact decimal amounts.
+- Built a Power BI dashboard with summary cards, category and year charts,
+  a category filter, and a table of the eight exceptions.
+- Checked the dashboard by selecting ambulatory encounters and clearing the
+  filter to confirm the totals and exception rows changed as expected.
+- Used a separate verification script with 17 checks and deliberately altered
+  inputs to check whether it caught errors.
 
-- **[Three-page visual report (PDF)](docs/PROJECT_BRIEF.pdf):** project, work completed,
-  results, impact, and recommendations.
-- **[Reproduction guide](docs/REPRODUCIBILITY.md):** data provenance, environment,
-  commands, database setup, and verification scope.
-- **[Validation evidence](outputs/verification_summary.json):** 17 independently
-  recomputed checks against archived CSVs and saved exports.
-- **[Verifier failure checks](outputs/verifier_negative_controls.json):** deliberate
-  changes to a copied balance flag and charge amount were both rejected.
-- **[Eight exception traces](outputs/balance_exception_trace.csv):** exact-decimal
-  comparison of encounter costs, transaction totals, and recorded balances.
-- **[Category results](data/processed/financial_summary_by_category.csv)** and
-  **[reporting data](outputs/claim_reporting.csv)**.
-- **[Power BI measures and interaction checks](powerbi/README.md)**.
+The main result was understanding why matching charges and payments did not
+explain every balance in the data. I also created scripts I could rerun to check
+the results. I did not measure savings, recovered revenue, or time saved.
 
-The overview screenshot and filter recording are included in this repository.
-The visual project report PDF is included. A separate Power BI dashboard PDF
-and editable model export are not included.
+## Project files
 
-## Workflow
-
-```mermaid
-flowchart LR
-    A[Synthea archive] --> B[Profile and validate CSVs]
-    B --> C[Aggregate transactions per claim]
-    C --> D[Join encounter context]
-    D --> E[Reconcile and investigate exceptions]
-    B --> F[Load MySQL source tables]
-    F --> G[SQL validation and reporting export]
-    G --> H[Power BI measures and visuals]
-    H --> I[Test category filtering]
-```
-
-Transactions are aggregated before joining, preventing a one-to-many join from
-multiplying financial totals. Left joins preserve source claims. Join checks
-verify cardinality, row counts, encounter matches, and patient consistency.
+- [Reproduction guide](docs/REPRODUCIBILITY.md): source restoration, Python commands,
+  SQL setup, metric definitions, and investigation references.
+- [Verification results](outputs/verification_summary.json) and
+  [failure controls](outputs/verifier_negative_controls.json).
+- [Eight exception traces](outputs/balance_exception_trace.csv),
+  [category summary](data/processed/financial_summary_by_category.csv), and
+  [Power BI reporting data](outputs/claim_reporting.csv).
+- [Dashboard documentation and interaction checks](powerbi/DASHBOARD.md) and
+  [DAX measures](powerbi/measures.dax).
 
 ## Run the analysis
 
-Follow the [source restoration instructions](docs/REPRODUCIBILITY.md) first.
-Run from the repository root:
+Start with the [reproduction guide](docs/REPRODUCIBILITY.md). The full checks need
+the original source archive or an identical snapshot; raw files are excluded from Git.
+The verifier uses Python's standard library. Analysis requires pandas; MySQL is
+an optional path. The environment and live-model verification limits are documented
+in the guide.
 
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-python scripts/profile_sources.py
-python scripts/validate_financial_data.py
-python scripts/analyze_financials.py
-python scripts/reconcile_claim_balances.py
-python scripts/trace_balance_exceptions.py
-python scripts/verify_portfolio.py
-```
-
-`verify_portfolio.py` uses only Python's standard library and can verify the
-preserved sample and saved exports without MySQL, Power BI, or an LLM. A new
-installation is not claimed as tested; the [environment snapshot](docs/environment_snapshot.txt)
-records the environment used for verification. MySQL is an optional reproduction
-path and requires separate setup.
-
-## Skills demonstrated
-
-- Python/pandas source profiling, validation, aggregation, and reusable functions.
-- SQL joins, CTEs, conditional aggregation, window functions, and reporting queries.
-- SQLAlchemy database loading, transactions, schema checks, and decimal money types.
-- Claim-level financial reconciliation and source-code-supported investigation.
-- Power BI Service authoring, explicit DAX measures, cards, bar/line charts,
-  a slicer, visual-level exception filtering, and tested filter interactions.
-- Clear distinction between observed facts, supported explanations, and unverified claims.
-
-The current Power BI model is one reporting table. Star-schema relationships,
-RLS, scheduled refresh, drillthrough, and automated deployment
-are not demonstrated capabilities.
-
-## Scope and provenance
-
-The original learning plan considered denials, appeals, patient journeys, and
-revenue leakage. The delivered analysis is deliberately limited to claims,
-payments, category activity, and reporting discrepancies; no denial dataset or
-revenue-recovery result is implemented.
+## Data and scope
 
 Data comes from [Synthea sample data](https://github.com/synthetichealth/synthea-sample-data),
 generated by the [Synthea simulator](https://github.com/synthetichealth/synthea).
-The original archive and extracted source files are retained locally and excluded
-from Git; their hashes and dimensions are recorded in validation evidence.
-The mutable upstream `latest` download may change. See the reproduction guide
-for exact-snapshot limitations and source attribution.
+This is synthetic sample analysis, not a real provider's performance. I included the visual report, dashboard screenshot, recording, code, and
+selected analysis outputs in this repository. An editable Power BI model and a separate dashboard PDF export
+are not included.
 
-This was a guided learning project using ChatGPT/Codex for explanation, code
-review, and documentation assistance. Code, source references, and validation
-results are available for review. The personal chat transcript is excluded.
-
-Maintained by the repository owner. For a reproducibility issue, open a GitHub
-issue describing the command, environment, and sanitized error message.
+I used ChatGPT/Codex for explanations, code review, and help with documentation.
+For reproducibility questions, open a GitHub issue with the command, environment,
+and sanitized error message.
