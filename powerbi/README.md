@@ -26,9 +26,6 @@ screenshots, not by an API connection to the live model.
 | Ambulatory selected | 4,083 | $12,277,051.63 | $12,277,051.63 | 0 | Empty |
 | Category selection cleared | 9,421 | $15,795,506.28 | $15,795,506.28 | 8 | Restored |
 
-The user supplied screenshots of both states during final review. This verifies
-the demonstrated category interaction; it is not a complete report test suite.
-
 ## Preservation status
 
 - Overview image: [report canvas](screenshots/overview.png), reviewed October 15, 2026.
@@ -36,11 +33,8 @@ the demonstrated category interaction; it is not a complete report test suite.
   (MP4, approximately 39 seconds), reviewed October 15, 2026. Shows the
   ambulatory state above, additional category selections, and restoration of
   the full totals and eight exception rows after clearing the selection.
-- Optional clean report PDF: not included.
 - Optional editable `.pbix`/model export: pending, subject to service permissions
   and download mode. A live-connected PBIX is not a self-contained data snapshot.
-- Original browser screenshots: retained locally under `docs/private_evidence`,
-  ignored by Git because they include browser/workspace surroundings.
 
 The root README displays the overview and links to the recording. These files
 are prepared locally; GitHub publication is still pending.
